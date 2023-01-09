@@ -12,13 +12,15 @@ contract EthGame{
 
     uint256 public s_playerCounter;
     uint256 public ETH_AMOUNT = 0.1 ether;
-
+    mapping(address => uint256) public winnerAddresses;
 
     function deposit() public payable {
         require(msg.value == ETH_AMOUNT, "Need to send atleast 0.1 ETH");
         if(s_playerCounter == 14){
             console.log("You won the game!");
             s_playerCounter = 0;
+            winnerAddresses[msg.sender] = address(this).balance;
+            payable(msg.sender).transfer(address(this).balance);
         }
         else{
             console.log("You didnt win the game yet");
