@@ -1,6 +1,7 @@
 require("ethers");
 require("@nomiclabs/hardhat-waffle");
 require("hardhat-deploy");
+require("dotenv").config();
 
 module.exports = {
   solidity: "0.8.7",
@@ -8,7 +9,8 @@ module.exports = {
     hardhat: {
       chainId: 31337,
       forking: {
-        url: "https://eth-mainnet.g.alchemy.com/v2/HrINZAHYw97HLwgFGjfRDmNl9JHXVA8T",
+        url:
+          "https://eth-mainnet.g.alchemy.com/v2/HrINZAHYw97HLwgFGjfRDmNl9JHXVA8T",
       },
     },
   },
