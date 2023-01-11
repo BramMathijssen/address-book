@@ -51,18 +51,21 @@ describe("EthGame Unit Tests", function () {
     });
   });
   describe("(Redundant Test) Testing Transfering Funds Between Accounts", () => {
-    let balance;
     beforeEach(async () => {
       accounts = await ethers.getSigners(); // could also do with getNamedAccounts
       userConnectedContract = await ethGame.connect(accounts[1]);
       userAccount = accounts[1];
     });
     it("Testing of sending 0.1 ETH from account1 to account 2", async () => {
-      console.log(`the balance of this address is ${userAccount.address}`);
-      balance = (
+      console.log(`Checking Balance of address: ${userAccount.address}`);
+      const balanceBefore = (
         await ethGame.provider.getBalance(userAccount.address)
       ).toString();
-      console.log(ethers.utils.formatEther(balance), "ETH");
+      console.log(
+        "Balance before sending tx: ",
+        ethers.utils.formatEther(balanceBefore),
+        "ETH"
+      );
 
       let tx = {
         to: accounts[2].address,
@@ -72,13 +75,17 @@ describe("EthGame Unit Tests", function () {
       // getting the gas cost for the transaction
       const txResponse = await accounts[1].sendTransaction(tx);
       const txReceipt = await txResponse.wait();
-      const { gasUsed, effectiveGasPrice } = transactionReceipt;
+      const { gasUsed, effectiveGasPrice } = txReceipt;
       const gasCost = gasUsed.mul(effectiveGasPrice);
 
-      const balance = (
+      const balanceAfter = (
         await ethGame.provider.getBalance(userAccount.address)
       ).toString();
-      console.log(ethers.utils.formatEther(balance), "ETH");
+      console.log(
+        "Balance after sending tx: ",
+        ethers.utils.formatEther(balanceAfter),
+        "ETH"
+      );
     });
   });
   describe("Winning Functions", () => {
@@ -91,23 +98,51 @@ describe("EthGame Unit Tests", function () {
         await userConnectedContract.deposit({ value: sendValue });
       }
     });
-    it.only("Testing the winning function", async () => {
-      const balanceBeforeWinning = (
-        await userConnectedContract.provider.getBalance(userAccount.address)
-      ).toString();
-      console.log(ethers.utils.formatEther(balanceBeforeWinning), "ETH");
+    // it("Testing the winning function", async () => {
+    //   const balanceBeforeWinning = (
+    //     await userConnectedContract.provider.getBalance(userAccount.address)
+    //   ).toString();
+    //   console.log(ethers.utils.formatEther(balanceBeforeWinning), "ETH");
 
-      const contractBalance = (await ethGame.provider.getBalance(ethGame.address)).toString();
-      console.log(ethers.utils.formatEther(contractBalance), "ETH Contract balance")
+    //   const contractBalance = (await ethGame.provider.getBalance(ethGame.address)).toString();
+    //   console.log(ethers.utils.formatEther(contractBalance), "ETH Contract balance")
 
-      await userConnectedContract.deposit({ value: sendValue });
+    //   await userConnectedContract.deposit({ value: sendValue });
 
-      const balanceAfterWinning = (
-        await userConnectedContract.provider.getBalance(userAccount.address)
-      ).toString();
-      console.log(ethers.utils.formatEther(balanceAfterWinning), "ETH");
+    //   const balanceAfterWinning = (
+    //     await userConnectedContract.provider.getBalance(userAccount.address)
+    //   ).toString();
+    //   console.log(ethers.utils.formatEther(balanceAfterWinning), "ETH");
 
-      assert.equal(balanceBeforeWinning.add, "0");
+    //   assert.equal(balanceBeforeWinning.add, "0");
+    // });
+  });
+  describe("Testing the emit of event after winning ", () => {
+    it("Testing if the GameWon event will be emitted after the game has been won", async () => {
+      for (let i = 0; i < 14; i++) {
+        await ethGame.deposit({ value: sendValue });
+      }
+      await expect(ethGame.deposit({ value: sendValue })).to.emit(
+        ethGame,
+        "GameWon"
+      );
+    });
+    it.only("Testing if the the right arguments will be emitted on the game won event", async () => {
+      for (let i = 0; i < 14; i++) {
+        await ethGame.deposit({ value: sendValue });
+      }
+
+      const bal = await ethGame.provider.getBalance(ethGame.address);
+      console.log(`balance is ${bal}`);
+
+      await expect(ethGame.deposit({ value: sendValue }))
+        .to.emit(ethGame, "GameWon")
+        .withArgs(
+          deployer.address,
+          (
+            await ethGame.provider.getBalance(ethGame.address)
+          ).add(ethers.utils.parseEther("0.1"))
+        );
     });
   });
 });
