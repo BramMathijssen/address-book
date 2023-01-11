@@ -10,11 +10,10 @@ describe("EthGame Unit Tests", function () {
     await deployments.fixture("ethgame"); // Deploys modules with the tags “ethgame”
     ethGame = await ethers.getContract("EthGame"); // Returns a new connection to the EthGame Contract
   });
-
   describe("Contract initialisation", () => {
     it("Initialised the contract with an playercount of 0s", async () => {
       const playerCount = await ethGame.s_playerCounter();
-      // prints 2 because enum values are converted to numbers in the way they are ordered. (NONE is the 3rd (=2nd index) in the enum)
+
       assert.equal(playerCount, "0");
     });
   });
@@ -58,7 +57,7 @@ describe("EthGame Unit Tests", function () {
       userConnectedContract = await ethGame.connect(accounts[1]);
       userAccount = accounts[1];
     });
-    it.only("Testing of Transfers", async () => {
+    it("Testing of sending 0.1 ETH from account1 to account 2", async () => {
       console.log(`the balance of this address is ${userAccount.address}`);
       balance = (
         await ethGame.provider.getBalance(userAccount.address)
@@ -70,9 +69,13 @@ describe("EthGame Unit Tests", function () {
         value: ethers.utils.parseEther("0.1"),
       };
 
-      await accounts[1].sendTransaction(tx);
+      // getting the gas cost for the transaction
+      const txResponse = await accounts[1].sendTransaction(tx);
+      const txReceipt = await txResponse.wait();
+      const { gasUsed, effectiveGasPrice } = transactionReceipt;
+      const gasCost = gasUsed.mul(effectiveGasPrice);
 
-      balance = (
+      const balance = (
         await ethGame.provider.getBalance(userAccount.address)
       ).toString();
       console.log(ethers.utils.formatEther(balance), "ETH");
@@ -84,10 +87,27 @@ describe("EthGame Unit Tests", function () {
       accounts = await ethers.getSigners(); // could also do with getNamedAccounts
       userConnectedContract = await ethGame.connect(accounts[1]);
       userAccount = accounts[1];
-      for (let i = 0; i < 15; i++) {
-        await ethGame.deposit({ value: sendValue });
+      for (let i = 0; i < 14; i++) {
+        await userConnectedContract.deposit({ value: sendValue });
       }
     });
-    it("Testing the winning function", async () => {});
+    it.only("Testing the winning function", async () => {
+      const balanceBeforeWinning = (
+        await userConnectedContract.provider.getBalance(userAccount.address)
+      ).toString();
+      console.log(ethers.utils.formatEther(balanceBeforeWinning), "ETH");
+
+      const contractBalance = (await ethGame.provider.getBalance(ethGame.address)).toString();
+      console.log(ethers.utils.formatEther(contractBalance), "ETH Contract balance")
+
+      await userConnectedContract.deposit({ value: sendValue });
+
+      const balanceAfterWinning = (
+        await userConnectedContract.provider.getBalance(userAccount.address)
+      ).toString();
+      console.log(ethers.utils.formatEther(balanceAfterWinning), "ETH");
+
+      assert.equal(balanceBeforeWinning.add, "0");
+    });
   });
 });
