@@ -4,6 +4,7 @@ import { contractAddresses, abi } from "../constants";
 
 const ConnectWallet = () => {
   const [connectButtonText, setConnectButtonText] = useState("Connect");
+  const [gameWon, setGameWon] = useState("");
 
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
@@ -47,17 +48,29 @@ const ConnectWallet = () => {
   };
 
   const depositHandler = async (e) => {
+    if (gameWon !== "") {
+      setGameWon("");
+    }
     console.log(`----contract----`);
     console.log(contract);
     e.preventDefault();
+
+    const gasPrice = await contract.estimateGas.deposit({
+      value: ethers.utils.parseEther("0.1"),
+    });
     const tx = await contract.deposit({
       value: ethers.utils.parseEther("0.1"),
-      gasLimit: 100000,
+      gasLimit: gasPrice,
     });
   };
 
   contract
-    ? contract.on("GameWon", (event) => {
+    ? contract.on("GameWon", (winner, amountWon) => {
+        const amountInEth = ethers.utils.formatEther(amountWon);
+        setGameWon(
+          `You Won the game! The winning address is: ${winner} , with and amountWon of ${amountInEth} ETH}`
+        );
+        console.log(event);
         console.log(`game has been Won!`);
       })
     : null;
@@ -65,7 +78,8 @@ const ConnectWallet = () => {
   return (
     <div>
       <button onClick={connectWalletHandler}>{connectButtonText}</button>
-      <button onClick={depositHandler}>Deposit</button>
+      {contract && <button onClick={depositHandler}>Deposit</button>}
+      {gameWon && gameWon}
     </div>
   );
 };
