@@ -1,8 +1,8 @@
 const { ethers } = require("hardhat");
 const fs = require("fs");
 
-const FRONT_END_ADDRESSES_FILE = "../frontend/constants/contractAddresses.json";
-const FRONT_END_ABI_FILE = "../frontend/constants/abi.json";
+const FRONT_END_ADDRESSES_FILE = "../ethgame-frontend/constants/contractAddresses.json";
+const FRONT_END_ABI_FILE = "../ethgame-frontend/constants/abi.json";
 
 module.exports = async function() {
   if (process.env.UPDATE_FRONT_END) {
