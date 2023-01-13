@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { contractAddresses, abi } from "../constants";
+import EthersContext from "../context/ethers-context";
 
 const ConnectWallet = () => {
   const [connectButtonText, setConnectButtonText] = useState("Connect");
@@ -10,6 +11,8 @@ const ConnectWallet = () => {
   const [signer, setSigner] = useState(null);
   const [contract, setContract] = useState(null);
   const [chainId, setChainId] = useState(null);
+
+  const ethersCtx = useContext(EthersContext);
 
   const connectWalletHandler = async () => {
     if (window.ethereum) {
@@ -70,7 +73,6 @@ const ConnectWallet = () => {
         setGameWon(
           `You Won the game! The winning address is: ${winner} , with and amountWon of ${amountInEth} ETH}`
         );
-        console.log(event);
         console.log(`game has been Won!`);
       })
     : null;
