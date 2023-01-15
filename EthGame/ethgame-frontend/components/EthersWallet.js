@@ -5,11 +5,13 @@ import EthersContext from "../context/ethers-context";
 
 const ConnectWallet = () => {
   //const [connectButtonText, setConnectButtonText] = useState("Connect");
+  const [loading, setLoading] = useState(false);
   const [gameWon, setGameWon] = useState("");
 
   const ethersCtx = useContext(EthersContext);
 
   const depositHandler = async (e) => {
+    setLoading(true);
     if (gameWon !== "") {
       setGameWon("");
     }
@@ -24,6 +26,12 @@ const ConnectWallet = () => {
       value: ethers.utils.parseEther("0.1"),
       gasLimit: gasPrice,
     });
+
+    console.log(`done`);
+    const receipt = await tx.wait(1);
+    console.log(`----receipt---`);
+    console.log(receipt);
+    setLoading(false);
   };
 
   ethersCtx.contract
@@ -38,6 +46,7 @@ const ConnectWallet = () => {
 
   return (
     <div>
+      {loading ? <p>Loading...</p> : null}
       <button onClick={() => ethersCtx.onConnect()}>Connect</button>
       {ethersCtx.contract && <button onClick={depositHandler}>Deposit</button>}
       {gameWon && gameWon}

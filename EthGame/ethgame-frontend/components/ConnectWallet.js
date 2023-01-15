@@ -65,6 +65,10 @@ const ConnectWallet = () => {
       value: ethers.utils.parseEther("0.1"),
       gasLimit: gasPrice,
     });
+    console.log(`done`);
+    const receipt = await tx.wait(1);
+    console.log(`----receipt---`);
+    console.log(receipt);
   };
 
   contract
