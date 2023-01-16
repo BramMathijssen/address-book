@@ -13,11 +13,8 @@ export const EthersContextProvider = (props) => {
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
   const [contract, setContract] = useState(null);
+  const [userAddress, setUserAddress] = useState(null);
   const [chainId, setChainId] = useState(null);
-
-  const conn = () => {
-    console.log(`hey test conn`);
-  };
 
   const connectWalletHandler = async () => {
     if (window.ethereum) {
@@ -26,6 +23,7 @@ export const EthersContextProvider = (props) => {
           method: "eth_requestAccounts",
         });
         await updateEthers();
+        setUserAddress(accounts[0]);
         console.log(contractAddresses);
         console.log(accounts[0]);
       } catch (error) {
@@ -60,6 +58,7 @@ export const EthersContextProvider = (props) => {
         provider: provider,
         signer: signer,
         contract: contract,
+        userAddress: userAddress,
         onConnect: connectWalletHandler,
       }}
     >

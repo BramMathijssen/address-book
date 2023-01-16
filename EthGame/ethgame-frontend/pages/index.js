@@ -1,12 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
-import Connect from "../components/Connect";
 import ConnectWallet from "../components/ConnectWallet";
-import EthersWallet from "../components/EthersWallet";
 import GameDetails from "../components/GameDetails";
 import styles from "../styles/Home.module.css";
 import { useContext } from "react";
 import EthersContext from "../context/ethers-context";
+import EnterGame from "../components/EnterGame";
 
 export default function Home() {
   const ethersCtx = useContext(EthersContext);
@@ -19,9 +18,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <EthersWallet />
+        <ConnectWallet />
         {ethersCtx.contract && <GameDetails />}
-        <p>Tester</p>
+        {ethersCtx.contract && <EnterGame />}
       </main>
 
       <footer className={styles.footer}>
