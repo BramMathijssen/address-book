@@ -15,7 +15,7 @@ contract EthGame {
     event GameWon(address Winner, uint256 amountWon);
 
     function deposit() public payable {
-        require(msg.value == ETH_AMOUNT, "Need to send atleast 0.1 ETH");
+        require(msg.value >= ETH_AMOUNT, "Need to send atleast 0.1 ETH");
         if (s_playerCounter == 2) {
             console.log("You won the game!");
             s_playerCounter = 0;
