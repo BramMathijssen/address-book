@@ -1,1 +1,1 @@
-![EthGame Dashboard](ethgame-frontend\public\ethGame.jpg)
+![EthGame Dashboard](./ethgame-frontend/public/ethGame.jpg)
