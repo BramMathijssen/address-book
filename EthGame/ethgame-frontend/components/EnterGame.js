@@ -16,9 +16,6 @@ const EnterGame = () => {
     console.log(`amount deposited is ${depositAmount}`);
 
     setLoading(true);
-    // if (gameWon !== "") {
-    //   setGameWon("");
-    // }
     console.log(`----contract----`);
     console.log(ethersCtx.contract);
     e.preventDefault();

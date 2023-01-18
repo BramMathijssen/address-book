@@ -1,6 +1,4 @@
-import { React, useState, useEffect, useContext } from "react";
-import { ethers } from "ethers";
-import { contractAddresses, abi } from "../constants";
+import { React,  useContext } from "react";
 import EthersContext from "../context/ethers-context";
 
 import styles from "./ConnectWallet.module.scss";
