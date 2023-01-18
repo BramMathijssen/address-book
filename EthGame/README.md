@@ -1,1 +1,1 @@
-![EthGame Dashboard](https://ibb.co/26RRb1r)
+![EthGame Dashboard](ethgame-frontend\public\ethGame.jpg)
