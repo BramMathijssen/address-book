@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useContext } from "react";
 import { ethers } from "ethers";
 import EthersContext from "../context/ethers-context";
+import UiContext from "../context/ui-context";
 
 const GameDetails = () => {
   const [gameWon, setGameWon] = useState("");
@@ -8,6 +9,7 @@ const GameDetails = () => {
   const [contractBalance, setContractBalance] = useState("");
 
   const ethersCtx = useContext(EthersContext);
+  const uiCtx = useContext(UiContext);
 
   useEffect(() => {
     getGameDetails();
@@ -39,8 +41,8 @@ const GameDetails = () => {
   return (
     <div>
       <div className="details">
-        <p>Current Balance in Contract: {contractBalance} ETH</p>
-        <p>Current Games Played: {playerCount}</p>
+        <p>Current Balance in Contract: {uiCtx.contractBalance} ETH</p>
+        <p>Current Games Played: {uiCtx.playerCount}</p>
       </div>
       <div className="event">{gameWon && gameWon}</div>
     </div>

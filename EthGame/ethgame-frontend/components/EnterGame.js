@@ -1,11 +1,13 @@
 import { React, useState, useEffect, useContext } from "react";
 import { ethers } from "ethers";
 import EthersContext from "../context/ethers-context";
+import UiContext from "../context/ui-context";
 
 const EnterGame = () => {
   const [loading, setLoading] = useState(false);
   const [depositAmount, setDepositAmount] = useState(0);
   const ethersCtx = useContext(EthersContext);
+  const uiCtx = useContext(UiContext);
 
   const depositHandler = async (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ const EnterGame = () => {
 
     await tx.wait(1);
     setLoading(false);
+    uiCtx.updateUi();
   };
 
   const handleDepositAmountChange = (e) => {

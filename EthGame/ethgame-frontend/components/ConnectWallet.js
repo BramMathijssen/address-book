@@ -3,16 +3,27 @@ import { ethers } from "ethers";
 import { contractAddresses, abi } from "../constants";
 import EthersContext from "../context/ethers-context";
 
-const ConnectWallet = () => {
+import styles from "./ConnectWallet.module.scss";
 
+const ConnectWallet = () => {
   const ethersCtx = useContext(EthersContext);
 
   return (
-    <div>
+    <div className={styles.container}>
       {ethersCtx.userAddress ? (
-        <button className="connect-button connected" onClick={() => ethersCtx.onConnect()}>Connected</button>
+        <button
+          className={`${styles.button} ${styles.connected}`}
+          onClick={() => ethersCtx.onConnect()}
+        >
+          Connected
+        </button>
       ) : (
-        <button className="connect-button unconnected" onClick={() => ethersCtx.onConnect()}>Connect</button>
+        <button
+          className={`${styles.button} ${styles.unconnected}`}
+          onClick={() => ethersCtx.onConnect()}
+        >
+          Connect
+        </button>
       )}
     </div>
   );
