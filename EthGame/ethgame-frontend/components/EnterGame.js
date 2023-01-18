@@ -3,6 +3,8 @@ import { ethers } from "ethers";
 import EthersContext from "../context/ethers-context";
 import UiContext from "../context/ui-context";
 
+import styles from "./EnterGame.module.scss";
+
 const EnterGame = () => {
   const [loading, setLoading] = useState(false);
   const [depositAmount, setDepositAmount] = useState(0);
@@ -39,16 +41,21 @@ const EnterGame = () => {
   };
 
   return (
-    <div>
+    <div className={styles.enterGame}>
       {loading ? <p>Loading...</p> : null}
       <form onSubmit={depositHandler}>
-        <label>Enter Amount:</label>
+        <label className={styles.label}>Enter Amount:</label>
         <input
+          className={styles.input}
           type="text"
           placeholder="0"
           onChange={handleDepositAmountChange}
         ></input>
-        {ethersCtx.contract && <button>Deposit</button>}
+        {ethersCtx.contract && (
+          <button className={`${styles.button} ${styles.deposit}`}>
+            Deposit
+          </button>
+        )}
       </form>
     </div>
   );

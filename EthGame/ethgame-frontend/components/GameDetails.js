@@ -3,6 +3,8 @@ import { ethers } from "ethers";
 import EthersContext from "../context/ethers-context";
 import UiContext from "../context/ui-context";
 
+import styles from "./GameDetails.module.scss";
+
 const GameDetails = () => {
   const [gameWon, setGameWon] = useState("");
   const [playerCount, setPlayerCount] = useState("");
@@ -12,7 +14,7 @@ const GameDetails = () => {
   const uiCtx = useContext(UiContext);
 
   useEffect(() => {
-    getGameDetails();
+    uiCtx.updateUi();
   }, []);
 
   const getGameDetails = async () => {
@@ -39,7 +41,7 @@ const GameDetails = () => {
     : null;
 
   return (
-    <div>
+    <div className={styles.gameDetails}>
       <div className="details">
         <p>Current Balance in Contract: {uiCtx.contractBalance} ETH</p>
         <p>Current Games Played: {uiCtx.playerCount}</p>
