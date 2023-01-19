@@ -1,5 +1,4 @@
-require("ethers");
-require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-ethers");
 require("hardhat-deploy");
 require("dotenv").config();
 
@@ -8,9 +7,9 @@ module.exports = {
   networks: {
     hardhat: {
       chainId: 31337,
-      forking: {
-        url: "",
-      },
+      // forking: {
+      //   url: "",
+      // },
     },
   },
   namedAccounts: {
