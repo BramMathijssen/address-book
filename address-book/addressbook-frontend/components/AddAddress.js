@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import EthersContext from "../context/ethers-context";
 
+import styles from "./AddAddress.module.scss";
+
 const AddAddress = () => {
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
@@ -20,21 +22,23 @@ const AddAddress = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={addToAddressBook}>
-        <label>Add Address</label>
+    <div className={styles.addAddress}>
+      <form onSubmit={addToAddressBook} className={styles.form}>
+        <label className={styles.label}>Address</label>
         <input
+          className={styles.input}
           type="text"
           placeholder="0x123...345"
           onChange={handleAddressChange}
         ></input>
-        <label>Add Name</label>
+        <label className={styles.label}>Name</label>
         <input
+          className={styles.input}
           type="text"
           placeholder="John"
           onChange={handleNameChange}
         ></input>
-        <button>Add to AddressBook</button>
+        <button className={styles.button}>Add to AddressBook</button>
       </form>
     </div>
   );

@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import EthersContext from "../context/ethers-context";
 import SingleAddress from "./SingleAddress";
 
+import styles from './AddressBook.module.scss'
+
 const AddressBook = () => {
   const ethersCtx = useContext(EthersContext);
   const [addressBook, setAddressBook] = useState([
@@ -27,8 +29,9 @@ const AddressBook = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <div className={styles.container}>
       {addressBook.map((addy) => {
+        {console.log(`mapping boy`)}
         return (
           <SingleAddress
             key={Math.random()}
@@ -37,7 +40,7 @@ const AddressBook = () => {
           />
         );
       })}
-    </React.Fragment>
+    </div>
   );
 };
 
