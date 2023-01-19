@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { contractAddresses, abi } from "../constants";
 
 const EthersContext = React.createContext({
+  userAddress: null,
   provider: null,
   signer: null,
   contract: null,

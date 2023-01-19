@@ -1,10 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useContext } from "react";
 import AddAddress from "../components/AddAddress";
+import AddressBook from "../components/AddressBook";
 import ConnectWallet from "../components/ConnectWallet";
+import EthersContext from "../context/ethers-context";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const ethersCtx = useContext(EthersContext);
   return (
     <div className={styles.container}>
       <Head>
@@ -15,6 +19,7 @@ export default function Home() {
       <ConnectWallet />
       <main className={styles.main}>
         <AddAddress />
+        {ethersCtx.contract ? <AddressBook /> : null}
       </main>
     </div>
   );
