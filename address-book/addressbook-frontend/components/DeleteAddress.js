@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import EthersContext from "../context/ethers-context";
 
+import styles from "./DeleteAddress.module.scss";
+
 const DeleteAddress = (props) => {
   const ethersCtx = useContext(EthersContext);
 
@@ -10,7 +12,13 @@ const DeleteAddress = (props) => {
 
   return (
     <div>
-      <button onClick={deleteAddressHandler}>delete</button>
+      <button
+        className={styles.button}
+        role="button"
+        onClick={deleteAddressHandler}
+      >
+        X
+      </button>
     </div>
   );
 };

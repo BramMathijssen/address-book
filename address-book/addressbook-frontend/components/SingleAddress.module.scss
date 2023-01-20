@@ -1,0 +1,38 @@
+.container {
+  background-color: white;
+  margin: 1.25rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 25px 40px 25px 40px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.avatar {
+  //     border-radius: 25px;
+  //   -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  //   box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.addressDetails {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+.name {
+  font-size: 22px;
+  margin: 0px;
+  font-weight: 600;
+}
+
+.address {
+  margin-bottom: 0px;
+  color: #1327439a;
+}
+
+.button {
+  margin-left: auto; // pushes the last element to the right side
+  
+}
