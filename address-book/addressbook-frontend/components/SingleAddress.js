@@ -7,6 +7,7 @@ import styles from "./SingleAddress.module.scss";
 const SingleAddress = (props) => {
   const avatarRef = useRef();
 
+  // https://stackoverflow.com/questions/71678374/get-metamask-profile-picture-and-name-use-web3
   useEffect(() => {
     console.log(`in useffect`);
     if (props.address) {
