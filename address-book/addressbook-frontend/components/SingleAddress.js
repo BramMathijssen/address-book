@@ -3,9 +3,11 @@ import DeleteAddress from "./DeleteAddress";
 import jazzicon from "@metamask/jazzicon";
 
 import styles from "./SingleAddress.module.scss";
+import EditModal from "./EditModal";
 
 const SingleAddress = (props) => {
   const avatarRef = useRef();
+  const [showModal, setshowModal] = useState(false);
 
   // https://stackoverflow.com/questions/71678374/get-metamask-profile-picture-and-name-use-web3
   useEffect(() => {
@@ -19,8 +21,15 @@ const SingleAddress = (props) => {
       element.appendChild(icon);
     }
   }, [props.address, avatarRef]);
+
+  const openModalHandler = () => {
+    console.log(`test`);
+    return <EditModal />;
+  };
+
   return (
     <div className={styles.container}>
+      {showModal && <EditModal />}
       <div className={styles.avatar} ref={avatarRef} />
       <div className={styles.addressDetails}>
         <p className={styles.name}>{props.name}</p>
@@ -28,6 +37,7 @@ const SingleAddress = (props) => {
       </div>
       <div className={styles.button}>
         <DeleteAddress address={props.address} />
+        <button onClick={() => setshowModal(true)}>Open Modal</button>
       </div>
     </div>
   );
