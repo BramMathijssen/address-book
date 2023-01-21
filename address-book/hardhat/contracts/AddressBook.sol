@@ -33,11 +33,9 @@ contract AddressBook {
         ];
         bytes memory addressNameBytes = bytes(addressName);
 
-        if (addressNameBytes.length != 0) {
+        if (addressNameBytes.length == 0) {
             s_addressToAliasesMapping[msg.sender][_address] = _name;
             s_addressToAddressArray[msg.sender].push(_address);
-        } else {
-            revert();
         }
     }
 
