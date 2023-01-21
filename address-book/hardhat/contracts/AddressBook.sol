@@ -28,8 +28,17 @@ contract AddressBook {
         address _address,
         string memory _name
     ) public {
-        s_addressToAliasesMapping[msg.sender][_address] = _name;
-        s_addressToAddressArray[msg.sender].push(_address);
+        string memory addressName = s_addressToAliasesMapping[msg.sender][
+            _address
+        ];
+        bytes memory addressNameBytes = bytes(addressName);
+
+        if (addressNameBytes.length != 0) {
+            s_addressToAliasesMapping[msg.sender][_address] = _name;
+            s_addressToAddressArray[msg.sender].push(_address);
+        } else {
+            revert();
+        }
     }
 
     // function to edit the name of an address
