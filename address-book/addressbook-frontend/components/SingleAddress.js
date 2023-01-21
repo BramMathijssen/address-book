@@ -9,6 +9,10 @@ const SingleAddress = (props) => {
   const avatarRef = useRef();
   const [showModal, setshowModal] = useState(false);
 
+  const closeModalHandler = () => {
+    setshowModal(false);
+  };
+
   // https://stackoverflow.com/questions/71678374/get-metamask-profile-picture-and-name-use-web3
   useEffect(() => {
     console.log(`in useffect`);
@@ -22,14 +26,9 @@ const SingleAddress = (props) => {
     }
   }, [props.address, avatarRef]);
 
-  const openModalHandler = () => {
-    console.log(`test`);
-    return <EditModal />;
-  };
-
   return (
     <div className={styles.container}>
-      {showModal && <EditModal />}
+      <EditModal show={showModal} closeModal={closeModalHandler} />
       <div className={styles.avatar} ref={avatarRef} />
       <div className={styles.addressDetails}>
         <p className={styles.name}>{props.name}</p>

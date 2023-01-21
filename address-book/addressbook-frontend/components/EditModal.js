@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactModal from "react-modal";
 
 import styles from "./EditModal.module.scss";
 
-const EditModal = () => {
+const EditModal = (props) => {
+
   return (
     <div>
       {console.log(`modal time homie`)}
@@ -15,12 +16,15 @@ const EditModal = () => {
             margin: "auto auto",
           },
         }}
-        isOpen={true}
+        isOpen={props.show}
+        onRequestClose={props.closeModal}
         shouldCloseOnOverlayClick={true}
+        shouldReturnFocusAfterClose={true}
         shouldCloseOnEsc={true}
       >
         <h1>Edit</h1>
         <p>Edit the Address here</p>
+        <button onClick={props.closeModal}>Close Modal</button>
       </ReactModal>
     </div>
   );
