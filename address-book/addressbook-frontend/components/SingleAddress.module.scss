@@ -32,7 +32,14 @@
   color: #1327439a;
 }
 
-.button {
+.actions {
   margin-left: auto; // pushes the last element to the right side
-  
+  display: flex;
+  align-items: row;
+  gap: 10px;
+}
+
+.close,
+.edit {
+  cursor: pointer;
 }

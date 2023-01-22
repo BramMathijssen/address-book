@@ -40,10 +40,14 @@ const EditModal = (props) => {
         shouldCloseOnEsc={true}
       >
         <h1>Edit</h1>
-        <p>Edit the Address here</p>
+        <p>Edit the Name for address: {props.address}</p>
         <form onSubmit={editHandler}>
           <label>Name</label>
-          <input type="text" onChange={handleNameChange}></input>
+          <input
+            type="text"
+            onChange={handleNameChange}
+            placeholder={props.name}
+          ></input>
           <label>Address</label>
           <input type="text" onChange={handleAddressChange}></input>
           <button>Edit</button>
