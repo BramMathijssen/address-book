@@ -29,8 +29,9 @@ const EditModal = (props) => {
         style={{
           content: {
             width: "40%",
-            height: "30%",
+            height: "40%",
             margin: "auto auto",
+            borderRadius: "10px",
           },
         }}
         isOpen={props.show}
@@ -40,19 +41,35 @@ const EditModal = (props) => {
         shouldCloseOnEsc={true}
       >
         <h1>Edit</h1>
-        <p>Edit the Name for address: {props.address}</p>
-        <form onSubmit={editHandler}>
-          <label>Name</label>
-          <input
-            type="text"
-            onChange={handleNameChange}
-            placeholder={props.name}
-          ></input>
-          <label>Address</label>
-          <input type="text" onChange={handleAddressChange}></input>
-          <button>Edit</button>
+        <p>Change the name for address: {props.address}</p>
+        <div className={styles.avatar} ref={props.avatar} />
+        <form className={styles.form} onSubmit={editHandler}>
+          <div className={styles.container}>
+            <label className={styles.label}>Address</label>
+            <input
+              className={styles.inputAddress}
+              type="text"
+              onChange={handleAddressChange}
+              placeholder={props.address}
+              disabled={true}
+            ></input>
+            <label className={styles.label}>Name</label>
+            <input
+              className={styles.input}
+              type="text"
+              onChange={handleNameChange}
+              placeholder={props.name}
+            ></input>
+          </div>
+          <div className={styles.buttonContainer}>
+            <button type="submit" className={styles.button}>
+              Edit
+            </button>
+            <button className={styles.closeButton} onClick={props.closeModal}>
+              Close
+            </button>
+          </div>
         </form>
-        <button onClick={props.closeModal}>Close Modal</button>
       </ReactModal>
     </div>
   );

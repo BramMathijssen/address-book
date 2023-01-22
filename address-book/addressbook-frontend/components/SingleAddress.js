@@ -35,6 +35,7 @@ const SingleAddress = (props) => {
         closeModal={closeModalHandler}
         address={props.address}
         name={props.name}
+        avatar={avatarRef}
       />
       <div className={styles.avatar} ref={avatarRef} />
       <div className={styles.addressDetails}>
