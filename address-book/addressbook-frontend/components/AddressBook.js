@@ -31,19 +31,16 @@ const AddressBook = () => {
 
   return (
     <div className={styles.container}>
-      {console.log(`rendering off AddressBook component`)}
-      {addressBook.map((addy) => {
-        {
-          console.log(`mapping boy`);
-        }
-        return (
-          <SingleAddress
-            key={Math.random()}
-            address={addy.address}
-            name={addy.name}
-          />
-        );
-      })}
+      {addressBook &&
+        addressBook.map((addy) => {
+          return (
+            <SingleAddress
+              key={Math.random()}
+              address={addy.address}
+              name={addy.name}
+            />
+          );
+        })}
     </div>
   );
 };
