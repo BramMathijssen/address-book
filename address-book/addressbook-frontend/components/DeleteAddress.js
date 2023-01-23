@@ -4,12 +4,16 @@ import { motion } from "framer-motion";
 import { X } from "phosphor-react";
 
 import styles from "./DeleteAddress.module.scss";
+import UiContext from "../context/ui-context";
 
 const DeleteAddress = (props) => {
   const ethersCtx = useContext(EthersContext);
+  const uiCtx = useContext(UiContext);
 
   const deleteAddressHandler = async () => {
-    await ethersCtx.contract.deleteAdddress(props.address);
+    const tx = await ethersCtx.contract.deleteAdddress(props.address);
+    await tx.wait(1);
+    uiCtx.updateUi();
   };
 
   return (

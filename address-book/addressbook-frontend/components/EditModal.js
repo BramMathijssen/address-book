@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import ReactModal from "react-modal";
 import EthersContext from "../context/ethers-context";
+import UiContext from "../context/ui-context";
 
 import styles from "./EditModal.module.scss";
 
@@ -8,10 +9,13 @@ const EditModal = (props) => {
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
   const ethersCtx = useContext(EthersContext);
+  const uiCtx = useContext(UiContext);
 
   const editHandler = async (e) => {
     e.preventDefault();
-    await ethersCtx.contract.editAddress(props.address, name);
+    const tx = await ethersCtx.contract.editAddress(props.address, name);
+    await tx.wait(1);
+    uiCtx.updateUi();
   };
 
   const handleNameChange = (e) => {
