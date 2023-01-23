@@ -46,15 +46,19 @@ contract AddressBook {
 
     // Function to remove an specific address from the address books
     function deleteAdddress(address _address) public {
-        address[] memory addressArray = s_addressToAddressArray[msg.sender];
+        uint length = s_addressToAddressArray[msg.sender].length;
 
-        for (uint256 i = 0; i < addressArray.length; i++) {
-            console.log(addressArray[i]);
-            if (addressArray[i] == _address) {
-                delete addressArray[i];
+        for (uint256 i = 0; i < length; i++) {
+            if (s_addressToAddressArray[msg.sender][i] == _address) {
+                if (1 < length && i < length - 1) {
+                    s_addressToAddressArray[msg.sender][i] = s_addressToAddressArray[msg.sender][length - 1]; 
+                }
+                delete s_addressToAddressArray[msg.sender][length - 1];
+                s_addressToAddressArray[msg.sender].pop();
+                delete s_addressToAliasesMapping[msg.sender][_address];
+                break;
             }
         }
-        s_addressToAddressArray[msg.sender] = addressArray;
     }
 
     // ! Not recommended for large Arrays
