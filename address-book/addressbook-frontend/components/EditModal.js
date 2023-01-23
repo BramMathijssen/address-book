@@ -11,7 +11,7 @@ const EditModal = (props) => {
 
   const editHandler = async (e) => {
     e.preventDefault();
-    await ethersCtx.contract.editAddress(address, name);
+    await ethersCtx.contract.editAddress(props.address, name);
   };
 
   const handleNameChange = (e) => {
