@@ -18,8 +18,15 @@ export default function Home() {
       </Head>
       <ConnectWallet />
       <main className={styles.main}>
-        <h2>📔 Address Book of {ethersCtx.userAddress}</h2>
-        <AddAddress />
+        {ethersCtx.contract ? (
+          <h2>📔 Address Book of {ethersCtx.userAddress}</h2>
+        ) : (
+          <div className={styles.intro}>
+            <h1>📔 Address Book dApp </h1>
+            <h3>Connect your wallet to Start :)</h3>
+          </div>
+        )}
+        {ethersCtx.contract ? <AddAddress /> : null}
         {ethersCtx.contract ? <AddressBook /> : null}
       </main>
     </div>
