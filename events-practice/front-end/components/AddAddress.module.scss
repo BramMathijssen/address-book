@@ -1,0 +1,31 @@
+.addAddress{
+    width: 15%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label{
+    margin-bottom: 5px;
+}
+
+.input {
+  padding: 0.5rem;
+  border-style: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #D7385E;
+  border-style: none;
+  color: white;
+  padding: 0.6rem;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  width: 40%;
+  margin: auto auto;
+}

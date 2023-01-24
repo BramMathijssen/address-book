@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+
+  .button {
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
+    border: none;
+    background: #D7385E;
+    border-radius: 30px;
+    color: white;
+    font-size: 19px;
+
+    &.connected {
+    }
+    &.unconnected {
+      cursor: pointer;
+    }
+  }
+}

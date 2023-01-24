@@ -1,0 +1,58 @@
+.ReactModal__Overlay {
+  width: 50%;
+  color: green;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.inputAddress {
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid;
+  color: black;
+  margin-bottom: 10px;
+  background-color: #e7e7e75b;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.buttonContainer {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  height: 40px;
+}
+
+.button {
+  background-color: #d7385e;
+  border-style: none;
+  color: white;
+  padding: 0.3rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 75px;
+}
+
+.closeButton {
+  background-color: #ffffff;
+  border: 2px solid #d7385e;
+  color: #d7385e;
+  padding: 0.3rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 75px;
+}
