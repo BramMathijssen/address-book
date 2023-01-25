@@ -2,8 +2,8 @@ const { ethers } = require("hardhat");
 const fs = require("fs");
 
 const FRONT_END_ADDRESSES_FILE =
-  "../addressbook-frontend/constants/contractAddresses.json";
-const FRONT_END_ABI_FILE = "../addressbook-frontend/constants/abi.json";
+  "../front-end/constants/contractAddresses.json";
+const FRONT_END_ABI_FILE = "../front-end/constants/abi.json";
 
 module.exports = async function () {
   console.log(`updating front end...`);

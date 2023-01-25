@@ -7,23 +7,15 @@ const UiContext = React.createContext({
 });
 
 export const UiContextProvider = (props) => {
-  const [addressBook, setAddressBook] = useState([]);
+  const [addressBook, setAddressBook] = useState();
 
   const ethersCtx = useContext(EthersContext);
 
   const updateUi = useCallback(async () => {
-    let addressBookArray = [];
-    const addresses = await ethersCtx.contract.getAddresses(
-      ethersCtx.userAddress
-    );
+    const number = (await ethersCtx.contract.s_myFavoriteNumber()).toString();
 
-    for (const addy of addresses) {
-      const name = await ethersCtx.contract.getAlias(addy);
-      addressBookArray.push({ address: addy, name: name });
-    }
-
-    setAddressBook(addressBookArray);
-  }, [ethersCtx.contract, ethersCtx.userAddress]);
+    setAddressBook(number);
+  }, []);
 
   return (
     <UiContext.Provider

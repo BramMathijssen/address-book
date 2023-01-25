@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useContext } from "react";
-import AddAddress from "../components/AddAddress";
 import AddressBook from "../components/AddressBook";
 import ConnectWallet from "../components/ConnectWallet";
 import EthersContext from "../context/ethers-context";
@@ -26,7 +25,6 @@ export default function Home() {
             <h3>Connect your wallet to Start :)</h3>
           </div>
         )}
-        {ethersCtx.contract ? <AddAddress /> : null}
         {ethersCtx.contract ? <AddressBook /> : null}
       </main>
     </div>
