@@ -1,3 +1,6 @@
+# Address Book dApp
+![](https://github.com/BramMathijssen/address-book/blob/master/frontend/public/address-book.gif)
+
 ## Used Techniques
 
 ### Hardhat
